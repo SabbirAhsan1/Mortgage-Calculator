@@ -11,7 +11,9 @@ public class Main{
 
         double mortgage = calculateMortgage(principal, interestRate, period);
         String mortgageFormatted = NumberFormat.getCurrencyInstance(Locale.US).format(mortgage);
-        System.out.println("Mortgage: " + mortgageFormatted);
+        System.out.println("Mortgage: ");
+        System.out.println("Monthly Payments: " + mortgageFormatted);
+        paymentSchedule(principal,period,interestRate);
     }
 
     public static double readNumber(
@@ -21,6 +23,7 @@ public class Main{
 
         Scanner input = new Scanner(System.in);
         double value;
+        
         while(true){
             System.out.print(prompt);
             value = input.nextDouble();
@@ -44,5 +47,25 @@ public class Main{
         period *= numberOfMonths;
         return (principal * (interestRate*Math.pow((1+interestRate), period))) / (Math.pow((1+interestRate), period) -1);
 
+
+    }
+    public static void paymentSchedule(
+            double principal,
+            double numberOfPayments,
+            double monthlyInterestRate){
+
+        final byte percent = 100;
+        final byte numberOfMonths = 12;
+        monthlyInterestRate = monthlyInterestRate/percent/numberOfMonths;
+        numberOfPayments = numberOfPayments*12;
+        System.out.println("PAYMENT SCHEDULE");
+        System.out.println("_____________");
+        
+        for(int i=1; i<=numberOfPayments; i++){
+            double paymentToMade = (principal*((Math.pow((1+monthlyInterestRate),numberOfPayments))-(Math.pow((1+monthlyInterestRate),i))))/(Math.pow((1+monthlyInterestRate),numberOfPayments)-1);
+            String paymentToMadeFormatted = NumberFormat.getCurrencyInstance(Locale.US).format(paymentToMade);
+            System.out.println(paymentToMadeFormatted);
+        }
+        
     }
 }
