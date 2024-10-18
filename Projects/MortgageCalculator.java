@@ -42,8 +42,7 @@ public class Main{
         final byte numberOfMonths = 12;
         interestRate = interestRate / percent / numberOfMonths ;
         period *= numberOfMonths;
-        double mortgage = (principal * (interestRate*Math.pow((1+interestRate), period))) / (Math.pow((1+interestRate), period) -1);
-        return mortgage;
+        return (principal * (interestRate*Math.pow((1+interestRate), period))) / (Math.pow((1+interestRate), period) -1);
 
     }
 }
